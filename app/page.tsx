@@ -8,7 +8,13 @@ type Message = {
 };
 
 export default function Home() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+  {
+    role: "ai",
+    text: "Hi! I'm a watermark recommendation AI. Just upload your image and get the perfect watermark recommended for you!",
+  },
+]);
+
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -44,11 +50,11 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
+    <main className="min-h-screen bg-[#E3F2FD] flex items-center justify-center p-6">
       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg flex flex-col h-[80vh]">
         <div className="p-4 border-b">
-          <h1 className="text-2xl font-bold">AI Chatbot</h1>
-          <p className="text-sm text-gray-500">Ask anything!</p>
+          <h1 className="text-2xl font-bold">AI Watermark Recommendation</h1>
+          <p className="text-sm text-[#E3F2FD]">Find the perfect watermark for your image!</p>
         </div>
 
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
