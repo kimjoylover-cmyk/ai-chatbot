@@ -54,7 +54,7 @@ export default function Home() {
       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg flex flex-col h-[80vh]">
         <div className="p-4 border-b">
           <h1 className="text-2xl font-bold">AI Watermark Recommendation</h1>
-          <p className="text-sm text-[#E3F2FD]">Find the perfect watermark for your image!</p>
+          <p className="text-sm text-gray-500">Find the perfect watermark for your image!</p>
         </div>
 
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
