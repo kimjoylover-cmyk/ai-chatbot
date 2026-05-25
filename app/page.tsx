@@ -11,51 +11,41 @@ export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "ai",
-      text: "Hi! I'm a watermark recommendation AI. Upload an image and I'll recommend the best watermark for it!",
+      text: "Hi! I'm a watermark recommendation AI. Describe your image, and I'll recommend the perfect watermark for you!",
     },
   ]);
 
   const [input, setInput] = useState("");
-  const [image, setImage] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
 
   async function sendMessage() {
-    if (!input.trim() && !image) return;
+    if (!input.trim()) return;
 
-    const formData = new FormData();
-    formData.append("message", input);
+    const userMessage: Message = {
+      role: "user",
+      text: input,
+    };
 
-    if (image) {
-      formData.append("image", image);
-    }
-
-    setMessages((prev) => [
-      ...prev,
-      {
-        role: "user",
-        text: image ? `${input || "Uploaded an image"} 📷` : input,
-      },
-    ]);
-
+    setMessages((prev) => [...prev, userMessage]);
     setInput("");
-    setImage(null);
     setLoading(true);
 
     const res = await fetch("/api/chat", {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: input }),
     });
 
     const data = await res.json();
 
-    setMessages((prev) => [
-      ...prev,
-      {
-        role: "ai",
-        text: data.reply,
-      },
-    ]);
+    const aiMessage: Message = {
+      role: "ai",
+      text: data.reply,
+    };
 
+    setMessages((prev) => [...prev, aiMessage]);
     setLoading(false);
   }
 
@@ -63,9 +53,11 @@ export default function Home() {
     <main className="min-h-screen bg-[#E3F2FD] flex items-center justify-center p-6">
       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg flex flex-col h-[80vh]">
         <div className="p-4 border-b">
-          <h1 className="text-2xl font-bold">AI Watermark Recommendation</h1>
+          <h1 className="text-2xl font-bold">
+            AI Watermark Recommendation
+          </h1>
           <p className="text-sm text-gray-500">
-            Find the perfect watermark for your image!
+            Describe your image and get the perfect watermark recommendation!
           </p>
         </div>
 
@@ -91,46 +83,28 @@ export default function Home() {
 
           {loading && (
             <div className="text-gray-500 text-sm">
-              AI is analyzing...
+              AI is typing...
             </div>
           )}
         </div>
 
-        <div className="p-4 border-t flex flex-col gap-2">
+        <div className="p-4 border-t flex gap-2">
           <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => {
-              if (e.target.files?.[0]) {
-                setImage(e.target.files[0]);
-              }
+            className="flex-1 border rounded-xl px-4 py-2 outline-none"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Describe your image..."
+            onKeyDown={(e) => {
+              if (e.key === "Enter") sendMessage();
             }}
           />
 
-          {image && (
-            <p className="text-sm text-gray-500">
-              Selected: {image.name}
-            </p>
-          )}
-
-          <div className="flex gap-2">
-            <input
-              className="flex-1 border rounded-xl px-4 py-2 outline-none"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Type your message..."
-              onKeyDown={(e) => {
-                if (e.key === "Enter") sendMessage();
-              }}
-            />
-
-            <button
-              onClick={sendMessage}
-              className="bg-black text-white px-5 py-2 rounded-xl"
-            >
-              Send
-            </button>
-          </div>
+          <button
+            onClick={sendMessage}
+            className="bg-black text-white px-5 py-2 rounded-xl"
+          >
+            Send
+          </button>
         </div>
       </div>
     </main>
