@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+:root{
+  --stageW: 490px;
+  --stageH: 335px;
+}
+
+body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    background:#E3F2FD;
+}
+
+.container{
+    width:850px;
+    background:#fff;
+    border-radius:10px;
+    padding:30px 35px 35px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.1);
+}
+
+.container.disable :where(.editor-panel, .reset-filter, .save-img){
+    opacity:0.6;
+    pointer-events:none;
+}
+
+.container h2{
+    font-size:22px;
+    font-weight:500;
+}
+
+.container .wrapper{
+    display:flex;
+    margin:20px 0;
+    min-height:335px;
+}
+
+.wrapper .editor-panel{
+    width:200px;
+    padding:15px 20px;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+.editor-panel .title{
+    display:block;
+    font-size:16px;
+    margin-bottom:12px;
+}
+
+.editor-panel input{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.right-panel{
+    flex-grow:1;
+    display:flex;
+    flex-direction:column;
+    margin-left:20px;
+    width:100%;
+}
+
+.preview-img{
+    width:100%;
+    height:var(--stageH);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.preview-img .canvas-container{
+    border:1px solid #ddd;
+    border-radius:6px;
+    background:#fff;
+}
+
+.controls{
+    width:var(--stageW);
+    margin:15px auto 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.controls button{
+    font-size:14px;
+    cursor:pointer;
+    color:#fff;
+    padding:11px 20px;
+    border-radius:3px;
+    text-transform:uppercase;
+    border:none;
+}
+
+.controls .reset-filter{
+    color:#6C757D;
+    background:#fff;
+    border:1px solid #6C757D;
+}
+
+.controls .choose-img{
+    background:#6C757D;
+}
+
+.controls .save-img{
+    background:#5372f0;
+}
+
+.controls .row{
+    display:flex;
+    gap:8px;
+}

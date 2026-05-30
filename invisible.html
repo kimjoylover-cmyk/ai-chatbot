@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Watermark Adder</title>
+
+  <link rel="stylesheet" href="invisible.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+  <div class="container disable">
+
+    <h2>Watermark Adder</h2>
+
+    <div class="wrapper">
+
+      <div class="editor-panel">
+
+        <div class="text">
+          <label class="title" for="watermark-text">
+            Enter your Text
+          </label>
+
+          <input
+            type="text"
+            id="watermark-text"
+            placeholder="watermark text"
+          />
+        </div>
+
+      </div>
+
+      <div class="right-panel">
+
+        <div class="preview-img">
+          <canvas id="c"></canvas>
+        </div>
+
+        <div class="controls">
+
+          <button class="reset-filter">
+            Reset Filters
+          </button>
+
+          <div class="row">
+
+            <input
+              type="file"
+              class="file-input"
+              accept="image/*"
+              hidden
+            />
+
+            <button class="choose-img">
+              Choose Image
+            </button>
+
+            <button class="save-img">
+              Save Image
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+
+  <script src="invisible.js"></script>
+
+</body>
+</html>
